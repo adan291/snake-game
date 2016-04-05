@@ -77,10 +77,12 @@ public class Segment
     }
     
     
-    public boolean colisionaCon(Canvas canvas)
+    public void borrar(Canvas lienzo)
     {
-        return (x >= 0 && getPosicionFinalX() < canvas.getSize().width && 
-                y >= 0 && getPosicionFinalY() < canvas.getSize().height );
+        Color currentColor = lienzo.getForegroundColor();        
+        lienzo.setForegroundColor(lienzo.getBackgroundColor());
+        lienzo.drawLine(x, y, getPosicionFinalX(), getPosicionFinalY());
+        lienzo.setForegroundColor(currentColor);
     }
    
 
