@@ -13,14 +13,20 @@ public class Segment
     private int y;
     private int angulo;
     private Color color;
-    public static final int SIZE = 10;
-    public Segment(int x, int y, int angulo, Color color)
+    public static final int SIZE = 25;
+    public Segment(int x, int y, int angulo)
     {
         this.angulo = angulo;
         this.x = x;
         this.y = y;
         this.color = color;
     }
+    
+    public void draw(Canvas lienzo)
+    {
+        lienzo.drawLine(x, y, getXFinal(), getYFinal());
+    }
+
     
     public int getX()
     {
@@ -36,6 +42,7 @@ public class Segment
     {
         return angulo;
     }
+    
     public int getXFinal()
     {
          int xPosFinal = x;
@@ -49,6 +56,7 @@ public class Segment
         }
         return xPosFinal;
     }
+    
     public int getYFinal()
     {
         int yPosFinal = y;
