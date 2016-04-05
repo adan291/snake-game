@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=x\ y\ angle
+comment0.target=Segment(int,\ int,\ int)
+comment1.params=
+comment1.target=int\ getX()
+comment2.params=
+comment2.target=int\ getY()
+comment3.params=
+comment3.target=int\ getXf()
+comment4.params=
+comment4.target=int\ getYf()
+comment5.params=
+comment5.target=int\ getSize()
+comment6.params=segment
+comment6.target=boolean\ segmentCollision(Segment)
+comment7.params=canvas
+comment7.target=boolean\ segmentInsideCanvas(Canvas)
+comment8.params=canvas
+comment8.target=void\ drawSegment(Canvas)
+comment9.params=canvas
+comment9.target=void\ eraseSegment(Canvas)
+numComments=10
