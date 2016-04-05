@@ -24,7 +24,7 @@ public class Segment
     
     public void draw(Canvas lienzo)
     {
-        lienzo.drawLine(x, y, getXFinal(), getYFinal());
+        lienzo.drawLine(x, y, getPosicionFinalX(), getPosicionFinalY());
     }
 
     
@@ -43,7 +43,7 @@ public class Segment
         return angulo;
     }
     
-    public int getXFinal()
+    public int getPosicionFinalX()
     {
          int xPosFinal = x;
         if(angulo == 180)
@@ -57,7 +57,7 @@ public class Segment
         return xPosFinal;
     }
     
-    public int getYFinal()
+    public int getPosicionFinalY()
     {
         int yPosFinal = y;
         if(angulo == 270)
@@ -71,12 +71,17 @@ public class Segment
         return yPosFinal;
     }
    
-    
     public static int getSize()
     {
         return SIZE;
     }
     
+    
+    public boolean colisionaCon(Canvas canvas)
+    {
+        return (x >= 0 && getPosicionFinalX() < canvas.getSize().width && 
+                y >= 0 && getPosicionFinalY() < canvas.getSize().height );
+    }
    
 
 }
