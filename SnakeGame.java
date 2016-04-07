@@ -99,5 +99,4 @@ public class SnakeGame
         lienzo.drawString("GAME OVER",posX, posY);
     }
     
-
 }
