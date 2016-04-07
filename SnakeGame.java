@@ -98,5 +98,78 @@ public class SnakeGame
         int posY = (int)(lienzo.getSize().getHeight())/2 - 10;
         lienzo.drawString("GAME OVER",posX, posY);
     }
-    
+    /**
+     * Metodo que crea una galleta de forma aleatoria, en posiciones validas
+     */
+    public Galleta creaGalleta()
+    {
+        Galleta galleta = null;
+        // Genera coordenadas
+        int coordX = 0;
+        int coordY = 0;
+        int lado;
+        boolean validas = true;
+        boolean seleccionadas = false;
+        // Comprueba si las coordenadas las tiene la serpiente u otra galleta. Usa un indice para darle
+        // una salida posible y evitar bucles infinitos si se queda sin coordenadas validas
+        int indice = 0;
+        while(!seleccionadas && indice < 10)
+        {
+            validas = true;
+            // Genera coordenadas para X e Y
+            int tempX = (int)lienzo.getSize().getWidth() - Snake.SIZE - 1;
+            int tempY = (int)lienzo.getSize().getHeight() - Snake.SIZE - 1;
+            coordX = rand.nextInt(tempX) + Snake.SIZE;
+            coordY = rand.nextInt(tempY) + Snake.SIZE;
+            // Deben ser multiplos del size de los segmentos, para que la serpiente pueda comerlas
+            coordX = coordX - (coordX%Snake.SIZE);
+            coordY = coordY - (coordY%Snake.SIZE);
+            // Ahora comprueba que no se genere en ninguna posicion de la serpiente, ni en ninguna
+            // posicion de las galletas
+            int index = 0;
+            // Bucle para las galletas
+            while(index < galletas.size() && (validas))
+            {
+                Galleta temp = galletas.get(index);
+                if((temp.getXPos() == coordX) && (temp.getYPos() == coordY))
+                {
+                    validas = false;
+                }
+                index++;
+            }
+            // Comprueba la serpiente
+            index = 0;
+            if(serpiente != null && validas)
+            {
+                int indiSerp = 0;
+                // Recorre todas las serpientes
+                while(indiSerp < serpiente.size() && (validas))
+                {
+                    // Recorre cada segmento de la serpiente, y comprueba los puntos inicial y final
+                    ArrayList<Segment> segmentos = new ArrayList<Segment>(serpiente.get(indiSerp).getSerpiente());
+                    while(index < serpiente.size() && (validas))
+                    {
+                        Segment segment = segmentos.get(index);
+                        if(((segment.getPosicionX() == coordX) && (segment.getPosicionY() == coordY)) ||
+                        ((segment.getPosicionFinalX() == coordX) && (segment.getPosicionFinalY() == coordY)))
+                        {
+                            validas = false;
+                        }
+                        index++;
+                    }
+                    indiSerp++;
+                }
+            }
+            indice++;
+            seleccionadas = validas;
+        }
+        if(seleccionadas)
+        {
+            lado = rand.nextInt(Snake.SIZE/2) + 1;
+            galleta = new Galleta(coordX, coordY, lado, lienzo);
+        }
+        return galleta;
+    }
+
+
 }
