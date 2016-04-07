@@ -40,6 +40,24 @@ public class Segment
         }
         return posicionFinalX;
     }
+    
+    /*
+     * Devuelve la coordenada del eje X
+     */
+    public int getPosicionX()
+    {
+       
+        return posicionX;
+    }
+    /*
+     * Devuelve la coordenada del eje Y
+     */
+    public int getPosicionY()
+    {
+       
+        return posicionY;
+    }
+
 
     /*
      * Devuelve la coordenada del eje Y donde acaba el segmento
