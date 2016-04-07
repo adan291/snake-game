@@ -87,6 +87,17 @@ public class SnakeGame
         }
         return moverse;
     }
+     /**
+     * Muestra el mensaje de game over
+     */
+    public void gameOver()
+    {
+
+        lienzo.setForegroundColor(Color.RED);
+        int posX = (int)(lienzo.getSize().getWidth())/2 - 30;
+        int posY = (int)(lienzo.getSize().getHeight())/2 - 10;
+        lienzo.drawString("GAME OVER",posX, posY);
+    }
     
 
 }
