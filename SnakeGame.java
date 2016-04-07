@@ -170,6 +170,47 @@ public class SnakeGame
         }
         return galleta;
     }
+    
+    /**
+     * Metodo que comprueba si la galleta es comida por la serpiente
+     */
+    private Galleta compruebaGalletas(Snake serp)
+    {
+        Galleta galletaComida = null;
+        if((snake != null) && (galletas.size() > 0))
+        {
+            // Toma el ultimo segmento de la serpiente
+            ArrayList<Segment> segmentos = new ArrayList<Segment>(serp.getSerpiente());
+            Segment segment = segmentos.get(serpiente.size() - 1);
+            int index = 0;
+            // Recorre la arraylist de galletas para ver si concide alguna coordenada
+            while(index < galletas.size() && (galletaComida == null))
+            {
+                Galleta galleta = galletas.get(index);
+                if(((segment.getPosicionX() == galleta.getXPos()) && (segment.getPosicionY() == galleta.getYPos())) ||
+                ((segment.getPosicionFinalX() == galleta.getXPos()) && (segment.getPosicionFinalY()) == galleta.getYPos()))
+                {
+                    // Guarda la galleta que se come y la borra
+                    galletaComida = galleta;
+                    galletas.remove(galleta);
+                }
+                index++;
+            }
+        }
+        return galletaComida;
+    }
 
+    /**
+     * Metodo que pinta las galletas por pantalla
+     */
+    private void pintaGalletas()
+    {
+        for(int i = 0; i < galletas.size(); i++)
+        {
+            galletas.get(i).drawGalleta();
+        }
+    }
+
+    
 
 }
