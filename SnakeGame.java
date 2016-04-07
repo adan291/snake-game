@@ -46,8 +46,7 @@ public class SnakeGame
     public void erase(){
         lienzo.erase();
     }
-    
-    
+
 
     /**
      * Metodo para dar movimiento a la serpiente
@@ -87,7 +86,8 @@ public class SnakeGame
         }
         return moverse;
     }
-     /**
+
+    /**
      * Muestra el mensaje de game over
      */
     public void gameOver()
@@ -98,6 +98,7 @@ public class SnakeGame
         int posY = (int)(lienzo.getSize().getHeight())/2 - 10;
         lienzo.drawString("GAME OVER",posX, posY);
     }
+
     /**
      * Metodo que crea una galleta de forma aleatoria, en posiciones validas
      */
@@ -170,7 +171,7 @@ public class SnakeGame
         }
         return galleta;
     }
-    
+
     /**
      * Metodo que comprueba si la galleta es comida por la serpiente
      */
@@ -211,6 +212,40 @@ public class SnakeGame
         }
     }
 
-    
+    /**
+     * Metodo que inicia el juego
+     */
+    public void startGame()
+    {
+
+        // Genera las coordenadas para la serpiente, seran siempre coordenadas validas
+        int tempX = (int)lienzo.getSize().getWidth() - Snake.SIZE*2 - 1;
+        int tempY = (int)lienzo.getSize().getHeight() - Snake.SIZE*2 - 1;
+        int coordX = rand.nextInt(tempX) + Snake.SIZE*2;
+        int coordY = rand.nextInt(tempY) + Snake.SIZE*2;
+        // Deben ser multiplos del size de los segmentos
+        coordX = coordX - (coordX%Snake.SIZE);
+        coordY = coordY - (coordY%Snake.SIZE);
+        // Crea las serpientes indicadas
+        drawSnake();
+        // Crea un numero de galletas aleatorias
+        int numeroGalletas = rand.nextInt(80) + (10*serpiente.size());
+        Galleta galleta;
+        for(int i = 0; i < numeroGalletas; i++)
+        {
+            galleta = creaGalleta();
+            if(galleta != null)
+            {
+                galletas.add(galleta);
+            }
+        }
+        // Comienza a moverse la serpiente
+        boolean juega = true;
+        while(juega)
+        {
+            juega = animateSnake();
+        }
+        gameOver();
+    }
 
 }
